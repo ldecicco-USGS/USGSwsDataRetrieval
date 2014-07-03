@@ -3,11 +3,18 @@
 #' This function accepts a url parameter for a WaterML2 getObservation 
 #'
 #' @param obs_url string containing the url for the retrieval
-#' @return mergedDF a data frame containing columns agency, site, dateTime, values, and remark codes for all requested combinations
+#' @return a data frame containing columns time (date), values, and remark codes for all requested combinations
 #' @export
 #' @import XML
 #' @importFrom plyr rbind.fill.matrix
 #' @examples
+#' sites <- "02177000"
+#' startDate <- "2012-09-01"
+#' endDate <- "2012-10-01"
+#' offering <- '00003'
+#' property <- '00060'
+#' obs_url <- "http://waterservices.usgs.gov/nwis/dv/?site=02177000&ParameterCd=00060&format=waterml,2.0&StatCd=00003&startDT=2012-09-01&endDT=2012-10-01"
+#' dataReturned <- readWaterML2(obs_url)
 #' URL <- "http://webvastage6.er.usgs.gov/ogc-swie/wml2/dv/sos?request=GetObservation&featureID=435601087432701&observedProperty=00045&beginPosition=2012-01-01&offering=Sum"
 #' dataReturned3 <- readWaterML2(URL)
 readWaterML2 <- function(obs_url){
@@ -23,7 +30,10 @@ readWaterML2 <- function(obs_url){
     setNames(ifelse(nzchar(xmlValue(x)), xmlValue(x), 
                     ifelse("qualifier" == xmlName(x),xpathSApply(x,"./@xlink:title",namespaces = ns),"")), #originally I had the "" as xmlAttr(x) 
              xmlName(x)), namespaces = ns)
-
+  if(length(which(sapply(xp, function(x) length(x)) <= 1)) > 0){
+    xp <- xp[-which(sapply(xp, function(x) length(x)) <= 1)]
+  }
+  
   DF2 <- do.call(rbind.fill.matrix, lapply(xp, t))
   DF2 <- as.data.frame(DF2,stringsAsFactors=FALSE)
   DF2$time <- gsub(":","",DF2$time)
