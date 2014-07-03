@@ -10,10 +10,8 @@
 #'end_date, the latest date available for the parameter code data; and
 #'count_nu, the number of values available for the parameter code.
 #',EndDate, pCode, and name.
-#' @seealso \code{\link{readNWIS}}
 #' @references Information about current water conditions in the United States
 #'and information about unit values can be obtained from 
-#'\code{\link{http://waterdata.usgs.gov/usa/nwis/rt}}.
 #' @keywords DataIO
 #' @examples
 #'UVavailable <- whatUV("04027000")
