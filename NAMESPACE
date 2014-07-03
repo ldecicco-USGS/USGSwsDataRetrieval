@@ -2,6 +2,7 @@
 
 export(constructNWISURL)
 export(getDataAvailability)
+export(getSiteFileData)
 export(getWQPData)
 export(importRDB)
 export(padVariable)

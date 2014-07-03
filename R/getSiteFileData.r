@@ -2,8 +2,7 @@
 #'
 #' Imports data from USGS site file site. This function gets data from here: \url{http://waterservices.usgs.gov/}
 #'
-#' @param siteNumber string USGS site number.  This is usually an 8 digit number
-#' @param interactive logical Option for interactive mode.  If true, there is user interaction for error handling and data checks.
+#' @param siteNumber vector of string USGS site number.  This is usually an 8 digit number
 #' @keywords data import USGS web service
 #' @return retval dataframe with all information found in the expanded site file
 #' @export
