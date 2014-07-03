@@ -4,7 +4,7 @@ Title: Functions to retrieve USGS data
 Version: 0.0.0
 Date: 2014-07-03
 Author: David Lorenz and Laura De Cicco
-Maintainer: David Lorenz <rhirsch@usgs.gov>, Laura De Cicco
+Maintainer: David Lorenz <lorenz@usgs.gov>, Laura De Cicco
     <ldecicco@usgs.gov>
 Description: This package has data import and export functions for specialized
     formats used within the U.S. Geological Survey. 
