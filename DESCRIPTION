@@ -19,7 +19,8 @@ Depends:
 Imports:
     XML,
     RCurl,
-    reshape2
+    reshape2,
+    plyr
 Suggests:
     xtable,
     knitr

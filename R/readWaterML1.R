@@ -14,17 +14,17 @@
 #' offering <- '00003'
 #' property <- '00060'
 #' obs_url <- constructNWISURL(sites,property,startDate,endDate,'dv')
-#' data <- getWaterML1Data(obs_url)
+#' data <- readWaterML1(obs_url)
 #' urlMulti <- constructNWISURL("04085427",c("00060","00010"),startDate,endDate,'dv',statCd=c("00003","00001"))
-#' multiData <- getWaterML1Data(urlMulti)
+#' multiData <- readWaterML1(urlMulti)
 readWaterML1 <- function(obs_url){
 
-  content <- getURLContent(obs_url,.opts=list(timeout.ms=500000))
-  test <- capture.output(tryCatch(xmlTreeParse(content, getDTD=FALSE, useInternalNodes=TRUE),"XMLParserErrorList" = function(e) {cat("incomplete",e$message)}))
-  while (length(grep("<?xml",test))==0) {
-    content <- getURLContent(obs_url,.opts=list(timeout.ms=500000))
-    test <- capture.output(tryCatch(xmlTreeParse(content, getDTD=FALSE, useInternalNodes=TRUE),"XMLParserErrorList" = function(e) {cat("incomplete",e$message)}))
-  }
+#   content <- getURLContent(obs_url,.opts=list(timeout.ms=500000))
+#   test <- capture.output(tryCatch(xmlTreeParse(content, getDTD=FALSE, useInternalNodes=TRUE),"XMLParserErrorList" = function(e) {cat("incomplete",e$message)}))
+#   while (length(grep("<?xml",test))==0) {
+#     content <- getURLContent(obs_url,.opts=list(timeout.ms=500000))
+#     test <- capture.output(tryCatch(xmlTreeParse(content, getDTD=FALSE, useInternalNodes=TRUE),"XMLParserErrorList" = function(e) {cat("incomplete",e$message)}))
+#   }
 #   doc <- htmlTreeParse(content, getDTD=TRUE, useInternalNodes=TRUE)
   
   doc <- xmlTreeParse(obs_url, getDTD = FALSE, useInternalNodes = TRUE)
