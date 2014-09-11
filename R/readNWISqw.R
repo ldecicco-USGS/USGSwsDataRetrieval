@@ -1,33 +1,52 @@
-#'Water-Quality Data
+#' @title Water-Quality Data
 #'
-#'Import discrete sample water-quality data from NWIS web.
+#' @description Import discrete sample water-quality data from NWIS web.
 #'
-#'Valid groups are "All," "information," "physical," "cations," "anions,"
+#' @details Valid groups are "All," "information," "physical," "cations," "anions,"
 #'"nutrients," "microbiological," "biological," "metals," "nonmetals,"
 #'"toxicity," "pesticides," "pcbs," "other organics," "radio chemicals,",
 #'"stable isotopes," "sediment," and "population/community."
-#'
-#'@param sites a vector of the USGS station identifiers.
-#'@param params A character string contains the name of a group of parameter
-#'codes, or a vector of pamater codes. See \bold{Details}.
-#'@param begin.date the earliest date for data, must be a character with the
+#'The parameter group codes and corresponding NWIS descriptions
+#'\tabular{ll}{
+#'Code \tab Description\cr
+#'INF \tab Information \cr
+#'PHY \tab Physical \cr
+#'INM \tab Inorganics, Major, Metals (major cations) \cr
+#'INN \tab Inorganics, Major, Non-metals (major anions) \cr
+#'NUT \tab Nutrient \cr
+#'MBI \tab Microbiological \cr
+#'BIO \tab Biological \cr
+#'IMN \tab Inorganics, Minor, Non-metals \cr
+#'IMM \tab Inorganics, Minor, Metals \cr
+#'TOX \tab Toxicity \cr
+#'OPE \tab Organics, pesticide \cr
+#'OPC \tab Organics, PCBs \cr
+#'OOT \tab Organics, other \cr
+#'RAD \tab Radiochemical \cr
+#'SED \tab Sediment \cr
+#'POP \tab Population/community \cr
+#'}
+#' @param sites a character vector of the USGS station identifiers.
+#' @param params a character string that contains the code for a parameter
+#'group, or a character vector of 5-digit parameter codes. See \bold{Details}.
+#' @param begin.date the earliest date for data, must be a character with the
 #'format "YYYY-mm-dd."
-#'@param end.date the latest date for data, must be a character with the format
+#' @param end.date the latest date for data, must be a character with the format
 #'"YYYY-mm-dd."
-#'@return A data frame of columns describing water-quality samples organized by
+#' @return A data frame of columns describing water-quality samples organized by
 #'parameter code.
-#'@note Probably need a note.
-#'@seealso \code{\link{importNWISqw}}
-#'@references Lorenz, D.L., 2014, USGSqw OFR.\cr See information about discrete
+#' @note Probably need a note.
+#' @seealso \code{\link{readNWISwqp}}, \code{\link{readSTORETwqp}}
+#' @references Lorenz, D.L., 2014, USGSqw OFR.\cr See information about discrete
 #'samples at \url{http://nwis.waterdata.usgs.gov/usa/nwis/qw}.
-#'@keywords datasets IO
-#'@examples
+#' @keywords datasets IO
+#' @examples
 #'
 #'\dontrun{
 #'readNWISqw("05330000", "00608") # Ammonia samples from the Minnesota River at Jordan.
 #'}
 #'
-#'@export
+#' @export
 readNWISqw <- function(sites, params="All", begin.date="", end.date="") {
   ## Coding history:
   ##    2012Sep06 DLLorenz original Coding
@@ -35,11 +54,8 @@ readNWISqw <- function(sites, params="All", begin.date="", end.date="") {
   ##    2013Dec16 DLLorenz
   ##
   params <- paste(params,  collapse=",")
-  pgrp <- pmatch(params, c("information", "physical", "cations", "anions", "nutrients",
-                           "microbiological", "biological", "metals", "nonmetals",
-                           "toxicity", "pesticides", "pcbs", "other organics",
-                           "radio chemicals", "stable isotopes", "sediment",
-                           "population/community"), nomatch=0)
+  pgrp <- pmatch(params, c("INF", "PHY", "INM", "INN", "NUT", "MBI", "BIO", "IMM", "IMN", "TOX",
+  												 "OPE", "OPC", "OOT", "RAD", "XXX", "SED", "POP"), nomatch=0)
   if(pgrp == 0) {
     ## pack sites
     sites <- paste(sites, collapse=",")

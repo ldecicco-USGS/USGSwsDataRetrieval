@@ -8,6 +8,7 @@
 #' @import XML
 #' @importFrom plyr rbind.fill.matrix
 #' @examples
+#' \dontrun{
 #' sites <- "02177000"
 #' startDate <- "2012-09-01"
 #' endDate <- "2012-10-01"
@@ -17,6 +18,7 @@
 #' dataReturned <- readWaterML2(obs_url)
 #' URL <- "http://webvastage6.er.usgs.gov/ogc-swie/wml2/dv/sos?request=GetObservation&featureID=435601087432701&observedProperty=00045&beginPosition=2012-01-01&offering=Sum"
 #' dataReturned3 <- readWaterML2(URL)
+#' }
 readWaterML2 <- function(obs_url){
   
   doc <- xmlTreeParse(obs_url, getDTD = FALSE, useInternalNodes = TRUE)

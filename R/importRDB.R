@@ -141,7 +141,7 @@ importRDB <- function(file.name="", date.format=NULL, tz="",
             mat[,i] <- as.POSIXct(as.character(mat[,i]),tz=tz, format=date.format) # Date format specified
         }
         else if(regexpr("\\.",as.character(mat[,i][!empty][1])) > 0L) {
-          mat[,i] <- as.Date(as.character(mat[,i]),zone="UTC", format="$Y.%m.%d") # Date with dots
+          mat[,i] <- as.Date(as.character(mat[,i]),zone="UTC", format="%Y.%m.%d") # Date with dots
         }   
         else if(regexpr("-",as.character(mat[,i][!empty][1])) > 0L) {
           mat[,i] <- as.Date(as.character(mat[,i]),zone="UTC ", format="%Y-%m-%d") # Date with dashes

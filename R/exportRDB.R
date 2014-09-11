@@ -18,6 +18,7 @@
 #' @return The file name is returned.
 #' @seealso \code{\link{write.table}}, \code{\link{importRDB}}
 #' @keywords manip IO
+#' @importFrom USGSwsBase setFileType isDateLike
 #' @export
 exportRDB <- function(x, file.name="data.rdb", col.names=NULL, meta=FALSE,
                       code.rule=10) {

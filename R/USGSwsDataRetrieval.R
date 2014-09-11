@@ -4,7 +4,7 @@
 #' Package: \tab USGSwsDataRetrieval\cr
 #' Type: \tab Package\cr
 #' Version: \tab 0.0.0\cr
-#' Date: \tab 2014-07-03\cr
+#' Date: \tab 2014-09-09\cr
 #' License: \tab Unlimited for this package, dependencies have more restrictive licensing.\cr
 #' Copyright: \tab This software is in the public domain because it contains materials
 #' that originally came from the United States Geological Survey, an agency of

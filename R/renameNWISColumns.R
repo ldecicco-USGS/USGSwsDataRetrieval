@@ -1,9 +1,9 @@
 #'Rename Columns
 #'
-#'Renames columns in a dataset of daily or unit values retrieved from NWIS web. Daily and unit value columns
+#'database. Daily and unit value columns
 #'have names derived from their data descriptor, parameter, and statistic codes. This
 #'function reads information from the header and the arguments in the call to 
-#'\code{renCol} to rename those columns.
+#'to rename those columns.
 #'
 #' @param data the daily- or unit-values datset retrieved from NWISweb.
 #' @param p00010 the base name for parameter code 00010.
@@ -19,8 +19,8 @@
 #' @param \dots named arguments for the base name for any other parameter code. The
 #'form of the name must be like pXXXXX, where XXXXX is the parameter code.
 #' @return A dataset like \code{data} with selected columns renamed.
-#' @note The following statistics codes are converted by renCol. See 
-#'url{http://help.waterdata.usgs.gov/stat_cd_nm} for information about USGS statistics codes.
+#' @note The following statistics codes are converted by \code{renameNWISColumns}. See 
+#'\url{http://help.waterdata.usgs.gov/stat_cd_nm} for information about USGS statistics codes.
 #'\describe{
 #'\item{00001}{Maximum value, suffix: Max}
 #'\item{00002}{Minimum value, suffix: Min}
@@ -35,10 +35,10 @@
 #'\item{00023}{Tidal high-low value, suffix: HiLoTide}
 #'\item{00024}{Tidal low-low value, suffix: LoLoTide}
 #'}
-#' @seealso \code{\link{readNWIS}}
+#' @seealso \code{\link{readNWISdv}}, \code{\link{readNWISuv}}
 #' @keywords manip IO
 #' @export
-renCol <- function(data, p00010="Wtemp", p00045="Precip",
+renameNWISColumns <- function(data, p00010="Wtemp", p00045="Precip",
                    p00060="Flow", p00065="GH", p00095="SpecCond", p00300="DO",
                    p00400="pH", p62611="GWL", p63680="Turb", p72019="WLBLS",
                    ...) {
@@ -65,7 +65,7 @@ renCol <- function(data, p00010="Wtemp", p00045="Precip",
   Dstart <- grep("DD param", header)
   if(length(Dstart) == 0L)
     stop("invalid data")
-  ## Subtract 2 becuase Dstart = line 1 and Count is extra line
+  ## Subtract 2 because Dstart = line 1 and Count is extra line
   Dend <- grep("^#$", header[Dstart:length(header)])[1L] + Dstart - 2L
   header <- gsub("   *", ";", header[Dstart:Dend])
   header[1] <- gsub(" ", ";", header[1])

@@ -1,15 +1,34 @@
-#'Parameter Code Information
+#' @title Parameter Code Information
 #'
-#'Get information about USGS parameter codes.
+#' @description Get information about USGS parameter codes.
 #'
-#'Valid groups for \code{param} are "All," "information," "physical,"
-#'"cations," "anions,"
-#'"nutrients," "microbiological," "biological," "metals," "nonmetals,"
-#'"toxicity," "pesticides," "pcbs," "other organics," "radio chemicals,",
-#'"stable isotopes," "sediment," and "population/community."
-#'
-#'@param params A character string contains the name of a group of parameter
-#'codes, or a vector of pamater codes. See \bold{Details}.
+#' @details Valid parameter group codes for \code{params} are "All," 
+#'which retrieves all parameters and these parameter group codes 
+#'with the corresponding NWIS descriptions.
+#'\tabular{ll}{
+#'Code \tab Description\cr
+#'INF \tab Information \cr
+#'PHY \tab Physical \cr
+#'INM \tab Inorganics, Major, Metals (major cations) \cr
+#'INN \tab Inorganics, Major, Non-metals (major anions) \cr
+#'NUT \tab Nutrient \cr
+#'MBI \tab Microbiological \cr
+#'BIO \tab Biological \cr
+#'IMN \tab Inorganics, Minor, Non-metals \cr
+#'IMM \tab Inorganics, Minor, Metals \cr
+#'TOX \tab Toxicity \cr
+#'OPE \tab Organics, pesticide \cr
+#'OPC \tab Organics, PCBs \cr
+#'OOT \tab Organics, other \cr
+#'RAD \tab Radiochemical \cr
+#'STI \tab Stable isotopes \cr
+#'SED \tab Sediment \cr
+#'POP \tab Population/community \cr
+#'}
+
+#'@param params A character string that contains the name of a parameter
+#'group, or a vector of paramater codes. See \bold{Details} for parameter
+#'group codes.
 #'@param group include the parameter group in the output?
 #'@param name include the parameter name in the output?
 #'@param CASRN include the parameter Chemical Abstracts Service Registry Number
@@ -36,23 +55,23 @@ readNWISpcode <- function(params="All", group=TRUE, name=TRUE, CASRN=FALSE, shor
   ##    2012Dec28          This version
   ##
   ## The index of short names to NWIS group names
-  grpcd <- c("Information"="information",
-             "Physical"="physical",
-             "Inorganics, Major, Metals"="cations",
-             "Inorganics, Major, Non-metals"="anions",
-             "Nutrient"="nutrients",
-             "Microbiological"="microbiological",
-             "Biological"="biological",
-             "Inorganics, Minor, Metals"="metals",
-             "Inorganics, Minor, Non-metals"="nonmetals",
-             "Toxicity"="toxicity",
-             "Organics, pesticide"="pesticides",
-             "Organics, PCBs"="pcbs",
-             "Organics, other" ="other organics",
-             "Radiochemical"="radio chemicals",
-             "Stable Isotopes"="stable isotopes",
-             "Sediment"="sediment",
-             "Population/Community"="population/community")
+  grpcd <- c("Information"="INF",
+             "Physical"="PHY",
+             "Inorganics, Major, Metals"="INM",
+             "Inorganics, Major, Non-metals"="INN",
+             "Nutrient"="NUT",
+             "Microbiological"="MBI",
+             "Biological"="BIO",
+             "Inorganics, Minor, Metals"="IMM",
+             "Inorganics, Minor, Non-metals"="IMN",
+             "Toxicity"="TOX",
+             "Organics, pesticide"="OPE",
+             "Organics, PCBs"="OPC",
+             "Organics, other" ="OOT",
+             "Radiochemical"="RAD",
+             "Stable Isotopes"="STI",
+             "Sediment"="SED",
+             "Population/Community"="POP")
   ## Continue, ckprm = 0 if pcode list
   if(length(params) > 1L) # Must be multiple pcodes, get em all
     ckprm <- -1L
