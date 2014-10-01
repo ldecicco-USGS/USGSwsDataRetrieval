@@ -7,6 +7,9 @@
 #'with the first record in the database.
 #' @param end.date the data to use for the latest value. If "", then retrieve to most recent 
 #'values in the database.
+#' @param tz a character string specifying the time zone to be used for the date/time conversion.
+#'See \bold{Details}. The default setting, an empty character string, will use the default 
+#'setting on your computer.
 #' @param convert.type Convert data to types indicated by the column type in the
 #'data or as indicated in \bold{Note}?
 #' @return A data frame of the appropriate data. See
@@ -24,7 +27,7 @@
 #'readNWISmeas("01578310", begin.date="2010-10-01")
 #'}
 readNWISmeas <- function(site, begin.date="", end.date="",
-                         convert.type=TRUE) {
+												 tz="", convert.type=TRUE) {
   ## Coding history:
   ##    2005Oct25 TimCohn  Original
   ##    2009Dec30 TimCohn  Revisions
@@ -59,7 +62,8 @@ readNWISmeas <- function(site, begin.date="", end.date="",
   URL <- summary(myurl)$description # keep for debugging below
   warn <- options("warn")
   options(warn=-1)
-  retval <- try(importRDB(myurl, convert.type=convert.type), silent=TRUE)
+  retval <- try(importRDB(myurl, date.format="varies", tz=tz,
+  												convert.type=convert.type), silent=TRUE)
   close(myurl)
   options(warn)
   if(class(retval) == "try-error") {

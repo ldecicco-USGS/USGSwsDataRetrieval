@@ -33,7 +33,6 @@
 #' @seealso \code{\link{importRDB}}, \code{\link{renameNWISColumns}}
 #' @keywords manip IO
 #' @importFrom lubridate today
-#' @importFrom USGSwsBase select
 #' @export
 #' @examples
 #'\dontrun{

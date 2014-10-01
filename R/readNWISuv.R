@@ -14,9 +14,9 @@
 #'recent values in the database.
 #' @param param a character vector of the the parameter codes to retrieve. See \bold{Details}.
 #'The default value, "00060," retrieves streamflow data.
-#' @param tz a character string specifying the time zone to be used for the conversion.
+#' @param tz a character string specifying the time zone to be used for the date/time conversion.
 #'See \bold{Details}. The default setting, an empty character string, will use the default 
-#'setting on yur computer.
+#'setting on your computer.
 #' @param convert.type Convert data to types indicated by the column type in the
 #'data or as indicated in \bold{Note}?
 #' @return A data frame of the appropriate data. See

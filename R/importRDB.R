@@ -35,7 +35,13 @@
 #' @param file.name a character string specifying the name of the RDB file
 #'containing the data to be imported. 
 #' @param date.format a character string specifying the format of all date
-#'columns. Required for columns that contain date and time.
+#'columns. Required for columns that contain date and time. The default value,
+#'\code{NULL}, will read any valid date (not date and time) format. The special
+#'formats "none," which suppresses date conversion; and "varies," which can be 
+#'used when the date data included time data sometimes and sometimes not. 
+#'For the latter special format, the date and time data must be in POSIX format
+#'(YYYY-mm-dd HH:MM) with optional seconds. Fof dates missing time data, the time 
+#'will be set to midnight in the spcified or local time zone.
 #' @param tz the time zone information of the data.
 #' @param convert.type convert data according to the format line? Setting
 #'\code{convert.type} to \code{FALSE} forces all data to be imported as
@@ -137,8 +143,11 @@ importRDB <- function(file.name="", date.format=NULL, tz="",
           mat[,i] <- as.Date(NA)   # Empty date column
         }
         else if(!is.null(date.format)) {
-          if(date.format != "none")
-            mat[,i] <- as.POSIXct(as.character(mat[,i]),tz=tz, format=date.format) # Date format specified
+          if(date.format == "varies") {
+          	mat[,i] <- as.POSIXct(as.character(mat[,i]),tz=tz) # variable date format
+          } else if(date.format != "none") {
+          	mat[,i] <- as.POSIXct(as.character(mat[,i]),tz=tz, format=date.format) # Date format specified
+          }
         }
         else if(regexpr("\\.",as.character(mat[,i][!empty][1])) > 0L) {
           mat[,i] <- as.Date(as.character(mat[,i]),zone="UTC", format="%Y.%m.%d") # Date with dots

@@ -27,7 +27,7 @@
 #'# 05331000 MISSISSIPPI RIVER AT ST. PAUL, MN
 #'readNWIS("05331000")
 #'}
-readNWISratingt <- function(site, type="base") {
+readNWISrating <- function(site, type="base") {
   ## Coding history:
   ##    2014Jun10 DLLorenz Original coding
   ## 

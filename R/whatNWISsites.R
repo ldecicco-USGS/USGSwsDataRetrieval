@@ -41,7 +41,7 @@
 #'alt_acy_va \tab Altitude accuracy\cr
 #'alt_datum_cd \tab Altitude datum\cr
 #'huc_cd \tab Hydrologic unit code\cr }
-#' @seealso \code{\link{readNWIS}}
+#' @seealso \code{\link{readNWISsite}}
 #' @references Information about current water conditions in the United States
 #'and historical hydrologic data can be obtained from 
 #'\url{http://waterdata.usgs.gov}.\cr
