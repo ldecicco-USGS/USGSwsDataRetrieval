@@ -8,6 +8,7 @@
 #' @export
 #' @import XML
 #' @examples
+#' \dontrun{
 #' sites <- "02177000"
 #' startDate <- "2012-09-01"
 #' endDate <- "2012-10-01"
@@ -17,6 +18,7 @@
 #' data <- readWaterML1(obs_url)
 #' urlMulti <- constructNWISURL("04085427",c("00060","00010"),startDate,endDate,'dv',statCd=c("00003","00001"))
 #' multiData <- readWaterML1(urlMulti)
+#' }
 readWaterML1 <- function(obs_url){
 
 #   content <- getURLContent(obs_url,.opts=list(timeout.ms=500000))
@@ -55,7 +57,7 @@ readWaterML1 <- function(obs_url){
       
       methodID <- as.character(xpathSApply(subChunk, "ns1:method/@methodID", namespaces = chunkNS))
       
-      methodID <- padVariable(methodID,2)
+      methodID <- zeroPad(methodID,2)
       
       value <- as.numeric(xpathSApply(subChunk, "ns1:value",namespaces = chunkNS, xmlValue))  
       dateTime <- strptime(xpathSApply(subChunk, "ns1:value/@dateTime",namespaces = chunkNS),"%Y-%m-%dT%H:%M:%S")

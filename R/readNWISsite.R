@@ -3,7 +3,7 @@
 #'Reads site data from NWISweb.
 #'
 #'
-#' @param sites a character vector containing the USGS station identifier. 
+#' @param sites a character vector containing the USGS station identifiers. 
 #'Missing values are not permitted.
 #' @param dtype a character string indicating the data type desired, "all" (default)
 #'returns all data, "gage" returns data appropriate for a surface-water gage, and
@@ -28,8 +28,7 @@
 #'# 01578310 SUSQUEHANNA RIVER AT CONOWINGO, MD
 #'readNWISsite("01578310", dtype="gage")
 #'}
-readNWISsite <- function(sites, dtype="swdv", begin.date="", end.date="",
-                     param=NULL, stat=NULL, convert.type=TRUE) {
+readNWISsite <- function(sites, dtype="all", convert.type=TRUE) {
   ## Coding history:
   ##    2005Oct25 TimCohn  Original
   ##    2009Dec30 TimCohn  Revisions

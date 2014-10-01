@@ -1,9 +1,9 @@
-#' Site Inventory
+#' @title Site Inventory
 #'
-#' Get USGS streamgages, observation wells or other data collection sites
+#' @description Get USGS streamgages, observation wells or other data collection sites
 #'given some search criteria.
 #'
-#' There are several arguments to the \code{findSites} function. Only one of
+#' @details There are several arguments to the \code{whatNWISsites} function. Only one of
 #'\code{state}, \code{county}, \code{huc} or \code{box} can be used to 
 #'define the major filter. 
 #'In general, only a few need
@@ -29,7 +29,7 @@
 #'"any" for any type of data, "iv" for instantaneous values, "dv" for daily
 #'values, "gw" for ground-water levels, or "qw" for water-quality data.
 #' @return A data frame containing the columns.
-#'#'\tabular{ll}{ agency_cd \tab The agency code\cr 
+#'\tabular{ll}{ agency_cd \tab The agency code\cr 
 #'site_no \tab The site identifier\cr 
 #'station_nm \tab The site name\cr 
 #'site_tp_cd \tab The site type code\cr 
@@ -41,29 +41,28 @@
 #'alt_acy_va \tab Altitude accuracy\cr
 #'alt_datum_cd \tab Altitude datum\cr
 #'huc_cd \tab Hydrologic unit code\cr }
-#' @seealso \code{\link{readNWIS}}
+#' @seealso \code{\link{readNWISsite}}
 #' @references Information about current water conditions in the United States
 #'and historical hydrologic data can be obtained from 
-#'\code{\link{http://waterdata.usgs.gov}}.\cr
+#'\url{http://waterdata.usgs.gov}.\cr
 #'County FIPS codes can be obtained from 
-#'\code{\link{http://www.epa.gov/enviro/html/codes/state.html}}.\cr
+#'\url{http://www.epa.gov/enviro/html/codes/state.html}.\cr
 #'
 #' @keywords DataIO
 #' @examples
 #'\dontrun{
 #'# Find Streamgages on the Red River of the North
-#'findSites(huc="0902", name="Red River", data.type="dv")
+#'whatNWISsites(huc="0902", name="Red River", data.type="dv")
 #'# Find wells in Greeley county Nebraska that have water-quality samples
-#'findSites(type="GW", county="31077", data.type="qw")
+#'whatNWISsites(type="GW", county="31077", data.type="qw")
 #'}
 #' @export
-findSites <- function(type=c("SW", "ST", "GW", "WE", "SP", "LK", "ES", "OC"),
+whatNWISsites <- function(type=c("SW", "ST", "GW", "WE", "SP", "LK", "ES", "OC"),
                       state="", county="", huc="", box=list(),
                       name="", data.type=c("any", "iv", "dv", "gw", "qw")) {
   ## Coding history:
   ##    2014Apr24 DLLorenz original Coding
   ##    2014May02 DLLorenz finish initial working version
-  warning("findSites is deprecated in USGSwsBase and will be moved, and possibly renamed, to USGSwsDataRetrieval.")
   type <- match.arg(type)
   if(type == "SW")
     type <- "ST" # fix for those who rely on SW rather than the code used

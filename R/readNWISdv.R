@@ -30,8 +30,9 @@
 #'be converted depending on user needs.
 #' @author Original coding by Tim Cohn \email{tacohn@@usgs.gov} additional
 #'capabilities added by Dave Lorenz \email{lorenz@@usgs.gov}.
-#' @seealso \code{\link{importRDB}}, \code{\link{renCol}}
+#' @seealso \code{\link{importRDB}}, \code{\link{renameNWISColumns}}
 #' @keywords manip IO
+#' @importFrom lubridate today
 #' @export
 #' @examples
 #'\dontrun{

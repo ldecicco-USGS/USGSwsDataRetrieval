@@ -14,9 +14,9 @@
 #'recent values in the database.
 #' @param param a character vector of the the parameter codes to retrieve. See \bold{Details}.
 #'The default value, "00060," retrieves streamflow data.
-#' @param tz a character string specifying the time zone to be used for the conversion.
+#' @param tz a character string specifying the time zone to be used for the date/time conversion.
 #'See \bold{Details}. The default setting, an empty character string, will use the default 
-#'setting on yur computer.
+#'setting on your computer.
 #' @param convert.type Convert data to types indicated by the column type in the
 #'data or as indicated in \bold{Note}?
 #' @return A data frame of the appropriate data. See
@@ -25,8 +25,8 @@
 #' @note Column names ending in "_va" are always forced to be numeric even if
 #'the column header information indicates otherwise. Other columns may need to
 #'be converted depending on user needs.
-#' @seealso \code{\link{importRDB}}, \code{\link{renCol}}
-#' @keywords manip IO
+#' @seealso \code{\link{importRDB}}, \code{\link{renameNWISColumns}}
+#' @keywords manip dataIO
 #' @export
 #' @examples
 #'\dontrun{
@@ -37,7 +37,7 @@
 #'readNWISuv("01578310", begin.date="2010-10-01", end.date="2010-10-01",
 #' tz="America/Jamaica")
 #'}
-readNWISuv <- function(site, dtype="swdv", begin.date="", end.date="",
+readNWISuv <- function(site, begin.date="", end.date="",
                      param="00060", tz="", convert.type=TRUE) {
   ## Coding history:
   ##    2005Oct25 TimCohn  Original
@@ -66,11 +66,11 @@ readNWISuv <- function(site, dtype="swdv", begin.date="", end.date="",
   if(end.date == "") # Fix needed to set today
     end.date <- as.character(today())
   if(is.null(param)) {
-    stop("the param argument is required for dtype \"uv\"")
+    stop("the param argument is required unit-value data")
   }
   myurl <- url(paste("http://waterservices.usgs.gov/nwis/iv/?format=rdb,1.0&sites=", site,
                      "&startDT=",begin.date, "&endDT=", end.date, "&parameterCd=", param, sep=""))
-  ## Use the date.format option according to the dtype
+  ## Use the date.format option according to the uv data
   URL <- summary(myurl)$description # keep for debugging below
   warn <- options("warn")
   options(warn=-1)
