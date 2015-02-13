@@ -1,6 +1,14 @@
 USGSwsDataRetrieval
 ===================
 
+Please use the `dataRetrieval` package:
+
+```r
+install.packages('dataRetrieval')
+```
+
+Report any Issues here:
+[https://github.com/USGS-R/dataRetrieval/issues](https://github.com/USGS-R/dataRetrieval/issues)
 
 
 
